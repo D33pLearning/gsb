@@ -20,14 +20,7 @@ if ($uc && !$estConnecte) {
     $uc = 'accueil';
 }
 
-if ($uc != 'validerFicheFrais') {
-    if (isset($_SESSION['idVisiteur'])) {
-        unset($_SESSION['idVisiteur']);
-    }
-    if (isset($_SESSION['mois'])) {
-        unset($_SESSION['mois']);
-    }
-}
+
 switch ($uc) {
 case 'connexion':
     include 'controleurs/c_connexion.php';
