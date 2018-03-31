@@ -30,8 +30,7 @@
                     <?php
                 }
                 ?>
-                <input type="submit" value="Corriger" class="btn btn-success"
-                               role="button">
+                <button class="btn btn-success" type="submit" name="corrigerLesFrais">Corriger</button>
                 <button class="btn btn-danger" type="reset">Réinitailiser</button></p>
             </fieldset>
         </form>
@@ -48,7 +47,7 @@
         <tr>
             <th class="date">Date</th>
             <th class="libelle">Libellé</th>
-            <th class='montant'>Montant</th>                
+            <th class="montant">Montant</th>
         </tr>
         <?php
         
@@ -61,8 +60,10 @@
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
-		<td><button class="btn btn-success" type="submit">Corriger</button> <button class="btn btn-danger" type="reset">Réinitailiser</button>
-                <button class="btn btn-danger" type="submit">Refuser</button> <button class="btn btn-danger" type="submit">Reporter</button><td>
+                <td><button class="btn btn-success" type="submit" name="corrigerHF">Corriger</button> 
+                    <button class="btn btn-danger" type="reset" name="reinitialiser">Réinitailiser</button>
+                    <button class="btn btn-danger" type="submit" name="refuser">Refuser</button> 
+                    <button class="btn btn-danger" type="submit" name="reporter">Reporter</button><td>
             </tr>
             <?php
         }

@@ -21,11 +21,11 @@ if ($uc && !$estConnecte) {
 }
 
 if ($uc != 'validerFicheFrais') {
-    if (isset($GLOBALS['idVisiteur'])) {
-        unset($GLOBALS['idVisiteur']);
+    if (isset($_SESSION['idVisiteur'])) {
+        unset($_SESSION['idVisiteur']);
     }
-    if (isset($GLOBALS['mois'])) {
-        unset($GLOBALS['mois']);
+    if (isset($_SESSION['mois'])) {
+        unset($_SESSION['mois']);
     }
 }
 switch ($uc) {

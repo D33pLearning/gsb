@@ -10,11 +10,11 @@ $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $lesVisiteurs = $pdo->getLesVisiteurs();
 
 // on utilise des super globales pour ne pas perdre de valeurs
-if (isset($GLOBALS['idVisiteur'])) {
-    $visiteurSelectionne = $GLOBALS['idVisiteur'];
+if (isset($_SESSION['idVisiteur'])) {
+    $visiteurSelectionne = $_SESSION['idVisiteur'];
 }
-if (isset($GLOBALS['mois'])) {
-    $moisASelectionner = $GLOBALS['mois'];
+if (isset($_SESSION['mois'])) {
+    $moisASelectionner = $_SESSION['mois'];
 }
 
 switch ($action) {
@@ -31,9 +31,9 @@ case 'selectionnerMois':
         if (isset($_POST['lstVisiteur'])) {
             // on récupère la valeur
             $visiteurSelectionne = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING);
-            $GLOBALS['idVisiteur'] = $visiteurSelectionne;
+            $_SESSION['idVisiteur'] = $visiteurSelectionne;
         }
-        //si la valeur récupérée est truthy
+        //si la valeur récupérée est vraie
         if ($visiteurSelectionne) {
             //on charge la liste de mois pour le visiteur sélectionné
             $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');
@@ -43,7 +43,7 @@ case 'selectionnerMois':
         if ($lesCles) {
                 //on affecte le premier mois de la liste à moisASelectionner
                 $moisASelectionner = $lesCles[0];
-                $GLOBALS['mois'] = $moisASelectionner;
+                $_SESSION['mois'] = $moisASelectionner;
             }
         }
         include 'vues/v_listeVisiteursMoisComptable.php';
@@ -51,11 +51,11 @@ case 'selectionnerMois':
 		
 case 'voirLesFraisClotures' :
 
-
+    // on récupère le visiteur
     $visiteurSelectionne = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING);
-    $GLOBALS['idVisiteur'] = $visiteurSelectionne;
+    $_SESSION['idVisiteur'] = $visiteurSelectionne;
     $moisASelectionner = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
-    $GLOBALS['mois'] = $moisASelectionner;
+    $_SESSION['mois'] = $moisASelectionner;
     $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');
     
     // On récupère les frais 
@@ -71,35 +71,33 @@ case 'voirLesFraisClotures' :
 case 'majLesFrais' :
     
     // on récupère le visiteur
-    $visiteurSelectionne = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING);
-    $GLOBALS['idVisiteur'] = $visiteurSelectionne;
-    $moisASelectionner = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
-   
     // on identifie chaque cas de mises à jour pour effectuer les modifications nécessaires
-    if (isset($_POST['montant'])) {
+    
+    /*if (isset($_POST['LesFrais'])) {
          
         // on vérifie si un frais hors forfait a été modifié
+        $idFrais = $_POST['idFrais'];
     }
        
-    if (isset($_POST['lesFraisForfait'])) {
+    if (isset($_POST['corrigerLesFrais'])) {
         
        // on modifie les frais forfait
-       $idFrais = filter_input(INPUT_POST, 'lesFraisForfait', FILTER_SANITIZE_STRING);
-       $pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesFraisForfait);
+       $idFrais = $_POST['idFrais'];
+       //$pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesFraisForfait);
         
     }
-    if (isset($_POST['idFrais'])) {
+    if (isset($_POST['refuser'])) {
            
        // on vérifie si un frais a été refusé
        // on récupère l'id du frais
        // on modifie son libellé
-      $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
-      $pdo->majFraisHFRefuse($idFrais);
+     //$idFrais = $_POST['idFrais'];
+     //$pdo->majFraisHFRefuse($idFrais);
     }
-    if (isset($_POST['idFraisReporte'])) {
+    if (isset($_POST['reporter'])) {
         
         // on vérifie si un frais a été reporté
-    }
+    }*/
     
     // on charge mois
     $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');

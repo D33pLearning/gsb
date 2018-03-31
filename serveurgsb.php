@@ -60,7 +60,7 @@ if(isset($_REQUEST["operation"])){
         elseif($_REQUEST["operation"]=="connexion"){
             
             try {
-                print("connexion php\n");
+                //print("connexion php\n");
                 $lesdonnees = $_REQUEST["lesdonnees"];
 		$donnees = json_decode($lesdonnees);
 		$loginAndroid = $donnees[0];
@@ -71,7 +71,10 @@ if(isset($_REQUEST["operation"])){
                 if ($mdp != "" && $mdp != null){
                     // le mot de passe est correct
                     if (strcmp($mdp[0], $mdpAndroid) == 0){
-                        print("Bienvenue!");
+                        //print("connexion%");
+                        print("connexion%");
+                        $infosUtilisateur = $pdo->getInfosVisiteur($loginAndroid, $mdpAndroid);
+                        print(json_encode($infosUtilisateur));
                     // se connecter
                     }
                     // le mot de passe est incorrect
@@ -82,8 +85,7 @@ if(isset($_REQUEST["operation"])){
                 else {
                     print("L'identifiant est incorrect");
                 }
-                // recuperer le login et le mdp
-                // créer une fonction pdo pour insérer en base.
+                
             }
             
             catch(Exception $e){

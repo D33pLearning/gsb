@@ -118,6 +118,28 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
+    
+    /**
+     * Retourne un mot de passe
+     *
+     * @param String $login Login du visiteur
+     * 
+     * @return le mot de passe
+     */
+    public function getMdpVisiteur($login)
+    {
+		
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT visiteur.mdp AS mdp '
+            . 'FROM visiteur '
+            . 'WHERE visiteur.login = :unLogin AND estComptable = 0'
+        );
+        $requetePrepare->bindParam(':unLogin', $login, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        return $requetePrepare->fetch();
+    }
+    
+    
 	
 	/**
      * Retourne les informations d'un comptable
@@ -501,7 +523,7 @@ class PdoGsb
      * @return array tableau contenant les mois des fiches par état
      */
     public function getLesMoisDesFichesParEtat($idVisiteur,$etat)
-    {
+    {  
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'SELECT fichefrais.mois AS mois FROM fichefrais '
             . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
