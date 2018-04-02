@@ -57,9 +57,25 @@
             $montant = $unFraisHorsForfait['montant'];
             $idFrais = $unFraisHorsForfait['id']; ?>
             <tr>
-                <td><?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
+                <input class="form-control" name="idFrais" type="hidden" value="<?php echo $idFrais ?>">
+                        <td>
+                            <input type="text" id="txtDateHF"
+                                   name="dateFrais"
+                                   value="<?php echo $date ?>"
+                                   class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" id="txtLibelleHF"
+                                   name="libelle"
+                                   value="<?php echo $libelle?>"
+                                   class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" id="txtMontantHF"
+                                   name="montant"
+                                   value="<?php echo $montant ?>"
+                                   class="form-control">
+                        </td>
                 <td><button class="btn btn-success" type="submit" name="corrigerHF">Corriger</button> 
                     <button class="btn btn-danger" type="reset" name="reinitialiser">Réinitailiser</button>
                     <button class="btn btn-danger" type="submit" name="refuser">Refuser</button> 

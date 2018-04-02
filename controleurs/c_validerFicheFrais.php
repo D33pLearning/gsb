@@ -63,7 +63,6 @@ case 'voirLesFraisClotures' :
     $lesFraisForfait = $pdo->getLesFraisForfait($visiteurSelectionne, $moisASelectionner);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($visiteurSelectionne, $moisASelectionner);
     $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-    $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
     include 'vues/v_listeVisiteursMoisComptable.php';
     include 'vues/v_etatFraisComptable.php';
     break;      
@@ -73,17 +72,21 @@ case 'majLesFrais' :
     // on récupère le visiteur
     // on identifie chaque cas de mises à jour pour effectuer les modifications nécessaires
     
-    /*if (isset($_POST['LesFrais'])) {
+    if (isset($_POST['corrigerHF'])) {
          
         // on vérifie si un frais hors forfait a été modifié
-        $idFrais = $_POST['idFrais'];
+        
+        
+        $pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $nvFrais);
     }
        
     if (isset($_POST['corrigerLesFrais'])) {
         
        // on modifie les frais forfait
-       $idFrais = $_POST['idFrais'];
-       //$pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesFraisForfait);
+       //$idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
+       //$lesNouveauFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
+       
+       //$pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesNouveauFrais);
         
     }
     if (isset($_POST['refuser'])) {
@@ -91,13 +94,13 @@ case 'majLesFrais' :
        // on vérifie si un frais a été refusé
        // on récupère l'id du frais
        // on modifie son libellé
-     //$idFrais = $_POST['idFrais'];
-     //$pdo->majFraisHFRefuse($idFrais);
+     $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
+     $pdo->majFraisHFRefuse($idFrais);
     }
     if (isset($_POST['reporter'])) {
         
         // on vérifie si un frais a été reporté
-    }*/
+    }
     
     // on charge mois
     $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');
