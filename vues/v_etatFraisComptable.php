@@ -85,12 +85,12 @@
         }
         ?>
     </table>
-   </form>
+   
 </div>
 <div class="row">
 
 <p>Nombre de Justificatifs : <input type="text"></p> 
-<button class="btn btn-success" type="submit">Valider</button>
+<button class="btn btn-success" type="submit" name="valider">Valider</button>
 <button class="btn btn-danger" type="reset">Réinitailiser</button>
-
+</form>
 </div>

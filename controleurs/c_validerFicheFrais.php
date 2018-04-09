@@ -106,6 +106,12 @@ case 'majLesFrais' :
         // on vérifie si un frais a été reporté
     }
     
+    if (isset($_POST['valider'])) {
+        
+        // si le comptable valide les frais
+        $pdo->majEtatFicheFrais($visiteurSelectionne, $moisASelectionner, 'VA');
+    }
+    
     // on charge mois
     $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');
     include 'vues/v_listeVisiteursMoisComptable.php';

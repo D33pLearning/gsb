@@ -293,7 +293,18 @@ class PdoGsb
             $requetePrepare->execute();
         }
     }
-    
+    /**
+     * Met à jour la table ligneFraisHorsForfait
+     * Met à jour la table ligneFraisHorsForfait pour un frais et
+     * les modifications données en enregistrant les nouveaux.
+     *
+     * @param String $idFrais ID du frais
+     * @param String $libelle   libelle correction du comptable du frais
+     * @param Array  $montant   montant correction comptable du frais
+     * @param Array  $date      date correction comptable du frais                   
+     *
+     * @return null
+     */
         public function majFraisHorsForfait($idFrais, $libelle, $date, $montant)
     {
             $dateFr = dateFrancaisVersAnglais($date);
