@@ -75,7 +75,11 @@ case 'majLesFrais' :
     if (isset($_POST['corrigerHF'])) {
          
         // on vérifie si un frais hors forfait a été modifié
-        
+        $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
+        $date = $_POST['dateFrais'];
+        $libelle = $_POST['libelle'];
+        $montant = $_POST['montant'];
+        $pdo->majFraisHorsForfait($idFrais, $libelle, $date, $montant);
     }
        
     if (isset($_POST['corrigerLesFrais'])) {

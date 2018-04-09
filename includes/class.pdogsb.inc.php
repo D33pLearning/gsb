@@ -294,6 +294,23 @@ class PdoGsb
         }
     }
     
+        public function majFraisHorsForfait($idFrais, $libelle, $date, $montant)
+    {
+            $dateFr = dateFrancaisVersAnglais($date);
+            $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait '
+                . 'SET lignefraishorsforfait.libelle = :unLibelle ,'
+                . 'lignefraishorsforfait.montant = :unMontant ,'
+                . 'lignefraishorsforfait.date = :uneDate ' 
+                . 'WHERE lignefraishorsforfait.id = :unIdFrais '
+            );
+            $requetePrepare->bindParam(':unIdFrais', $idFrais, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
+            $requetePrepare->bindParam(':uneDate', $dateFr, PDO::PARAM_STR);
+            $requetePrepare->execute();
+    }
+    
     
     /**
      * Refuse un frais en modifiant le libelle avec [REFUSE] devant
