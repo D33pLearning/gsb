@@ -76,8 +76,6 @@ case 'majLesFrais' :
          
         // on vérifie si un frais hors forfait a été modifié
         
-        
-        $pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $nvFrais);
     }
        
     if (isset($_POST['corrigerLesFrais'])) {
@@ -87,6 +85,8 @@ case 'majLesFrais' :
        //$lesNouveauFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
        
        //$pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesNouveauFrais);
+        $lesFrais = $_POST['lesFrais'];
+        $pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesFrais);
         
     }
     if (isset($_POST['refuser'])) {
