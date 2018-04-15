@@ -80,18 +80,16 @@ case 'majLesFrais' :
         $libelle = $_POST['libelle'];
         $montant = $_POST['montant'];
         $pdo->majFraisHorsForfait($idFrais, $libelle, $date, $montant);
+        include 'vues/v_messageCorrection.php';
+        
     }
        
     if (isset($_POST['corrigerLesFrais'])) {
         
-       // on modifie les frais forfait
-       //$idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
-       //$lesNouveauFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
-       
-       //$pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesNouveauFrais);
+       // on corrige les frais forfaitisés
         $lesFrais = $_POST['lesFrais'];
         $pdo->majFraisForfait($visiteurSelectionne, $moisASelectionner, $lesFrais);
-        
+        include 'vues/v_messageCorrection.php';
     }
     if (isset($_POST['refuser'])) {
            
@@ -100,18 +98,27 @@ case 'majLesFrais' :
        // on modifie son libellé
      $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
      $pdo->majFraisHFRefuse($idFrais);
+     include 'vues/v_messageCorrection.php';
     }
     if (isset($_POST['reporter'])) {
         
         // on vérifie si un frais a été reporté
-    }
-    
+        $idFrais = filter_input(INPUT_POST, 'idFrais', FILTER_SANITIZE_STRING);
+        $pdo->majFicheFraisHFReport($idFrais);
+        include 'vues/v_messageCorrection.php';
+    }   
     if (isset($_POST['valider'])) {
         
         // si le comptable valide les frais
         $pdo->majEtatFicheFrais($visiteurSelectionne, $moisASelectionner, 'VA');
+        include 'vues/v_messageFicheValidee.php';
     }
     
+    if (isset($_POST['justificatifs'])) {
+        
+        //$justificatifs = $_POST['justificatifs'];
+        $pdo->majNbJustificatifs($visiteurSelectionne, $moisASelectionner, 2);
+    }
     // on charge mois
     $lesMois = $pdo->getLesMoisDesFichesParEtat($visiteurSelectionne,'CL');
     include 'vues/v_listeVisiteursMoisComptable.php';

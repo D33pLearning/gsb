@@ -52,11 +52,15 @@
         <?php
         
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            $idFrais = $unFraisHorsForfait['id'];
             $date = $unFraisHorsForfait['date'];
             $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
             $montant = $unFraisHorsForfait['montant'];
-            $idFrais = $unFraisHorsForfait['id']; ?>
+             ?>
             <tr>
+                <form method="post" 
+              action="index2.php?uc=validerFicheFrais&action=majLesFrais" 
+              role="form">
                 <input class="form-control" name="idFrais" type="hidden" value="<?php echo $idFrais ?>">
                         <td>
                             <input type="text" id="txtDateHF"
@@ -80,6 +84,7 @@
                     <button class="btn btn-danger" type="reset" name="reinitialiser">Réinitailiser</button>
                     <button class="btn btn-danger" type="submit" name="refuser">Refuser</button> 
                     <button class="btn btn-danger" type="submit" name="reporter">Reporter</button><td>
+                </form>
             </tr>
             <?php
         }
@@ -87,10 +92,10 @@
     </table>
    
 </div>
-<div class="row">
-
-<p>Nombre de Justificatifs : <input type="text"></p> 
+<form method="post" 
+              action="index2.php?uc=validerFicheFrais&action=majLesFrais" 
+              role="form">
 <button class="btn btn-success" type="submit" name="valider">Valider</button>
-<button class="btn btn-danger" type="reset">Réinitailiser</button>
+
 </form>
 </div>

@@ -341,6 +341,17 @@ class PdoGsb
         $requetePrepare->bindParam(':unIdFrais', $idFrais, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
+    public function majFicheFraisHFReport($idFrais)
+    {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'UPDATE lignefraishorsforfait '
+            . 'SET lignefraishorsforfait.mois = CONVERT(lignefraishorsforfait.mois + 1, SIGNED INTEGER)'
+            . 'WHERE lignefraishorsforfait.id  = :unIdFrais '
+        );
+        $requetePrepare->bindParam(':unIdFrais', $idFrais, PDO::PARAM_INT);
+        $requetePrepare->execute();
+    }
 
     /**
      * Met à jour le nombre de justificatifs de la table ficheFrais
@@ -574,6 +585,7 @@ class PdoGsb
         }
         return $lesMois;
     }
+    
 
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur pour un
@@ -604,7 +616,7 @@ class PdoGsb
         $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
-
+    
     /**
      * Modifie l'état et la date de modification d'une fiche de frais.
      * Modifie le champ idEtat et met la date de modif à aujourd'hui.
@@ -628,4 +640,5 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
 }
